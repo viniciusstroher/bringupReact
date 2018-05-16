@@ -1,5 +1,5 @@
 import React                    from 'react';
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet,Button} from "react-native";
 // import Button                   from "react-native-button";
 import {Actions}                from "react-native-router-flux";
 
@@ -15,10 +15,20 @@ const styles = StyleSheet.create({
 });
 
 class LeftMenu extends React.Component {
-    render(){
+    onPressPerfilMenu(){
+
+    }
+    render(){ 
         return (
            <View style={styles.container}>
-                <Text>TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST</Text>
+                <Button
+                  onPress={this.onPressPerfilMenu.bind(this)}
+                  title="Perfil" 
+                  color="#841584"
+                  accessibilityLabel="Learn more about this purple button"
+                />
+
+
             </View>
         );
     }
