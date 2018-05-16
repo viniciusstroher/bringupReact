@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import Home from './scenes/Home';
-import NavigationDrawer from './components/DrawerContent';
 
 import {
   Scene,
@@ -24,19 +23,14 @@ import {
   Lightbox,
 } from 'react-native-router-flux';
 
-import DrawerContent from './components/DrawerContent';
 import LeftMenu      from './components/LeftMenu';
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
 
-    onPressLearnMore = () => {
-      // Actions.refresh({key:"drawer"});
-      Actions.refresh({key: "drawer", open: true})
-    }
-              // <Scene key="home" component={Home} renderLeftButton={renderMenuButton()} title="Home" initial>
-          // </Scene>
+    
+
     renderMenuButton = () => {
         console.log('renderMenuButton');
         return (
@@ -54,9 +48,12 @@ export default class App extends Component<Props> {
     return (
       <Router>
 
-        <Scene key="drawer" type={ActionConst.RESET} component={LeftMenu} drawer open={false} > 
-          <Scene key="main" initial>  
-            <Scene key="dashboard" component={Home} title="Dashboard"  /> 
+        <Scene key="drawer" type={ActionConst.RESET} drawer contentComponent={LeftMenu} open={false} > 
+
+          
+
+          <Scene key="main" >  
+            <Scene key="dashboard" component={Home} title="Dashboard"  initial /> 
           </Scene>
         </Scene>
 
