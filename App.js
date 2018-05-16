@@ -3,7 +3,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 
 import Home from './scenes/Home';
@@ -33,17 +34,16 @@ export default class App extends Component<Props> {
         console.log('renderMenuButton');
         return (
             <View>
-                <Text>Teste</Text>
-            </View>
+                <Button
+                  // onPress={onPressLearnMore}
+                  title="Menu" 
+                  color="#841584"
+                  accessibilityLabel="Learn more about this purple button"
+                />
+            </View> 
         );
     }
-    // leftButtonStyle={styles.navBack} 
-    // navigationBarStyle={styles.navHeader}
 
-    // <Scene
-    //                 key='homeView'
-    //                 component={HomeView}
-    //             />
     return (
       <Router>
 
