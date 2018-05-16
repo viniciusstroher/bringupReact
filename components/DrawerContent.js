@@ -1,40 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import React, { Component } from 'react';
+import {Actions, DefaultRenderer} from 'react-native-router-flux';
+import LeftMenu from './LeftMenu.js';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: 'red',
-  },
-});
-
-class DrawerContent extends React.Component {
-  static propTypes = {
-    name: PropTypes.string,
-    sceneStyle: ViewPropTypes.style,
-    title: PropTypes.string,
-  }
- 
-  static contextTypes = {
-    drawer: PropTypes.object,
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        {/* <Text>Drawer Content</Text>
-        <Button onPress={Actions.closeDrawer}>Back</Button> */}
-        <Text>Title: {this.props.title}</Text>
+export default class NavigationDrawer extends Component {
+    render(){
         
-      </View >
-    );
-  }
+        const state    = this.props.navigationState;
+        const children = state.children;
+        
+        return (
+            <Drawer
+                ref="navigation"
+                open={state.open}
+                onOpen={()=>Actions.refresh({key:state.key, open: true})}
+                onClose={()=>Actions.refresh({key:state.key, open: false})}
+                type="displace"
+                content={LeftMenu}
+                tapToClose={true}
+                openDrawerOffset={0.2}
+                panCloseMask={0.2}
+                negotiatePan={true}
+                styles={drawerStyles}
+                tweenHandler={(ratio) => {
+                  return {
+                    mainOverlay: { opacity: ratio === 0 ? 0 : 0.3, backgroundColor: '#000' }
+                  }
+                }}
+                // tweenHandler={Drawer.tweenPresets.parallax}
+                >
+                <DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate} />
+            </Drawer>
+        );
+    }
 }
 
-export default DrawerContent;
+const drawerStyles = {
+    drawer: {
+        shadowColor: '#000', shadowOpacity: 0.3, shadowRadius: 1
+    },
+    main: { paddingLeft: 0 }
+}
